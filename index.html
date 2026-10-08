@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#8e3d68">
+  <title>Safe Lady | نقل آمن للنساء</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">🛡️</div>
+      <div>
+        <h1>Safe Lady</h1>
+        <span>نقل آمن للنساء</span>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button class="icon-btn" onclick="toggleDarkMode()">🌙</button>
+      <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav id="mainNav" class="nav">
+    <button onclick="showPage('home')">الرئيسية</button>
+    <button onclick="showPage('booking')">حجز رحلة</button>
+    <button onclick="showPage('trips')">رحلاتي</button>
+    <button onclick="showPage('driver')">واجهة السائقة</button>
+    <button onclick="showPage('admin')">الإدارة</button>
+    <button onclick="showPage('profile')">حسابي</button>
+  </nav>
+
+  <main>
+
+    <!-- HOME -->
+    <section id="home" class="page active">
+      <div class="hero">
+        <div class="hero-text">
+          <span class="badge">🚗 Safe Lady</span>
+          <h2>تنقلي بأمان وراحة</h2>
+          <p>
+            خدمة نقل مخصصة للنساء، تجمع بين الراحة،
+            الأمان وسهولة الحجز.
+          </p>
+
+          <div class="hero-buttons">
+            <button class="primary-btn" onclick="showPage('booking')">
+              احجزي رحلة
+            </button>
+
+            <button class="secondary-btn" onclick="showPage('trips')">
+              رحلاتي
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="shield">🛡️</div>
+          <h3>سلامتك أولويتنا</h3>
+          <p>سائقات موثقات • تتبع الرحلة • دعم سريع</p>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <h2>لماذا Safe Lady؟</h2>
+      </div>
+
+      <div class="features">
+        <div class="feature-card">
+          <div>👩‍✈️</div>
+          <h3>سائقات</h3>
+          <p>نظام مخصص للسائقات وإدارة بياناتهن.</p>
+        </div>
+
+        <div class="feature-card">
+          <div>📍</div>
+          <h3>تتبع الرحلة</h3>
+          <p>معرفة حالة الرحلة وموقعها.</p>
+        </div>
+
+        <div class="feature-card">
+          <div>🚨</div>
+          <h3>زر SOS</h3>
+          <p>وصول سريع إلى خيارات الطوارئ.</p>
+        </div>
+
+        <div class="feature-card">
+          <div>⭐</div>
+          <h3>التقييم</h3>
+          <p>تقييم تجربة الرحلة والسائقة.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section id="booking" class="page">
+      <div class="page-title">
+        <span>🚗</span>
+        <div>
+          <h2>حجز رحلة</h2>
+          <p>حددي تفاصيل رحلتك</p>
+        </div>
+      </div>
+
+      <div class="form-card">
+
+        <label>📍 نقطة الانطلاق</label>
+        <input id="pickup" type="text" placeholder="مثال: جامعة 20 أوت 1955">
+
+        <label>📍 الوجهة</label>
+        <input id="destination" type="text" placeholder="مثال: وسط مدينة سكيكدة">
+
+        <div class="two-columns">
+          <div>
+            <label>📅 التاريخ</label>
+            <input id="tripDate" type="date">
+          </div>
+
+          <div>
+            <label>🕐 الوقت</label>
+            <input id="tripTime" type="time">
+          </div>
+        </div>
+
+        <label>💳 طريقة الدفع</label>
+
+        <select id="payment">
+          <option value="cash">الدفع نقدًا</option>
+          <option value="card">بطاقة إلكترونية - لاحقًا</option>
+        </select>
+
+        <div class="price-box">
+          <span>السعر التقديري</span>
+          <strong id="estimatedPrice">200 دج</strong>
+        </div>
+
+        <button class="primary-btn full" onclick="createTrip()">
+          تأكيد الحجز
+        </button>
+
+      </div>
+    </section>
+
+    <!-- TRIPS -->
+    <section id="trips" class="page">
+
+      <div class="page-title">
+        <span>📋</span>
+        <div>
+          <h2>رحلاتي</h2>
+          <p>جميع رحلاتك السابقة والحالية</p>
+        </div>
+      </div>
+
+      <div id="tripsContainer"></div>
+
+    </section>
+
+    <!-- TRACKING -->
+    <section id="tracking" class="page">
+
+      <div class="page-title">
+        <span>📍</span>
+        <div>
+          <h2>تتبع الرحلة</h2>
+          <p>رحلتك قيد المتابعة</p>
+        </div>
+      </div>
+
+      <div class="tracking-card">
+
+        <div class="map-placeholder">
+          <div class="map-pin">📍</div>
+          <p>خريطة الرحلة</p>
+          <small>سيتم ربط الخريطة الحقيقية لاحقًا</small>
+        </div>
+
+        <div class="driver-info">
+
+          <div class="driver-avatar">👩‍✈️</div>
+
+          <div>
+            <h3>سارة</h3>
+            <p>⭐ 4.9 • سائقة موثقة</p>
+            <p>🚗 Hyundai i10 • 123456-21</p>
+          </div>
+
+        </div>
+
+        <div class="trip-status">
+          <span class="status-dot"></span>
+          <span id="tripStatus">السائقة في الطريق إليك</span>
+        </div>
+
+        <div class="safety-buttons">
+          <button class="sos-btn" onclick="activateSOS()">🚨 SOS</button>
+          <button onclick="shareTrip()">📤 مشاركة الرحلة</button>
+          <button onclick="showSupport()">☎️ الدعم</button>
+        </div>
+
+        <button class="primary-btn full" onclick="finishTrip()">
+          إنهاء الرحلة
+        </button>
+
+      </div>
+    </section>
+
+    <!-- DRIVER -->
+    <section id="driver" class="page">
+
+      <div class="page-title">
+        <span>👩‍✈️</span>
+        <div>
+          <h2>واجهة السائقة</h2>
+          <p>إدارة الرحلات والحالة</p>
+        </div>
+      </div>
+
+      <div class="driver-profile">
+        <div class="driver-avatar big">👩‍✈️</div>
+
+        <div>
+          <h2>سارة أحمد</h2>
+          <p>⭐ 4.9 • 126 رحلة</p>
+          <span class="verified">✓ سائقة موثقة</span>
+        </div>
+      </div>
+
+      <div class="online-box">
+        <div>
+          <h3>حالة استقبال الرحلات</h3>
+          <p id="driverStatus">أنتِ غير متاحة حاليًا</p>
+        </div>
+
+        <button id="onlineButton" class="toggle-btn" onclick="toggleDriverStatus()">
+          تشغيل
+        </button>
+      </div>
+
+      <div class="stats">
+
+        <div class="stat-card">
+          <span>🚗</span>
+          <strong>126</strong>
+          <small>رحلة</small>
+        </div>
+
+        <div class="stat-card">
+          <span>⭐</span>
+          <strong>4.9</strong>
+          <small>التقييم</small>
+        </div>
+
+        <div class="stat-card">
+          <span>💰</span>
+          <strong>28,400</strong>
+          <small>دج</small>
+        </div>
+
+      </div>
+
+      <h3 class="subheading">طلبات الرحلات</h3>
+
+      <div id="driverRequests">
+
+        <div class="request-card">
+          <div>
+            <strong>رحلة جديدة</strong>
+            <p>جامعة سكيكدة → وسط المدينة</p>
+            <small>200 دج تقريبًا</small>
+          </div>
+
+          <div class="request-buttons">
+            <button class="accept" onclick="acceptRequest(this)">قبول</button>
+            <button class="reject" onclick="rejectRequest(this)">رفض</button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ADMIN -->
+    <section id="admin" class="page">
+
+      <div class="page-title">
+        <span>📊</span>
+        <div>
+          <h2>لوحة الإدارة</h2>
+          <p>إدارة ومتابعة Safe Lady</p>
+        </div>
+      </div>
+
+      <div class="admin-stats">
+
+        <div class="admin-card">
+          <span>👩</span>
+          <strong id="usersCount">128</strong>
+          <small>المستخدمات</small>
+        </div>
+
+        <div class="admin-card">
+          <span>👩‍✈️</span>
+          <strong>24</strong>
+          <small>السائقات</small>
+        </div>
+
+        <div class="admin-card">
+          <span>🚗</span>
+          <strong id="adminTrips">86</strong>
+          <small>الرحلات</small>
+        </div>
+
+        <div class="admin-card">
+          <span>💰</span>
+          <strong>17,200</strong>
+          <small>الإيرادات</small>
+        </div>
+
+      </div>
+
+      <div class="admin-panel">
+
+        <h3>آخر الرحلات</h3>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>الراكبة</th>
+                <th>السائقة</th>
+                <th>الحالة</th>
+                <th>السعر</th>
+              </tr>
+            </thead>
+
+            <tbody id="adminTable">
+
+              <tr>
+                <td>مريم</td>
+                <td>سارة</td>
+                <td><span class="success">مكتملة</span></td>
+                <td>200 دج</td>
+              </tr>
+
+              <tr>
+                <td>آمنة</td>
+                <td>ليلى</td>
+                <td><span class="warning">جارية</span></td>
+                <td>300 دج</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- PROFILE -->
+    <section id="profile" class="page">
+
+      <div class="page-title">
+        <span>👤</span>
+        <div>
+          <h2>حسابي</h2>
+          <p>إدارة معلوماتك الشخصية</p>
+        </div>
+      </div>
+
+      <div class="profile-card">
+
+        <div class="profile-avatar">👩</div>
+
+        <h2>مستخدمة Safe Lady</h2>
+        <p>Skikda, Algeria</p>
+
+        <div class="profile-info">
+          <div>
+            <span>الاسم</span>
+            <strong>Samah</strong>
+          </div>
+
+          <div>
+            <span>الهاتف</span>
+            <strong>05 XX XX XX XX</strong>
+          </div>
+
+          <div>
+            <span>عدد الرحلات</span>
+            <strong id="profileTrips">0</strong>
+          </div>
+        </div>
+
+        <button class="secondary-btn full" onclick="editProfile()">
+          تعديل المعلومات
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- SOS Modal -->
+  <div id="sosModal" class="modal">
+    <div class="modal-content emergency">
+
+      <button class="close" onclick="closeModal('sosModal')">×</button>
+
+      <div class="emergency-icon">🚨</div>
+
+      <h2>حالة طوارئ</h2>
+
+      <p>
+        هل تريدين تفعيل طلب المساعدة؟
+      </p>
+
+      <button class="sos-confirm" onclick="confirmSOS()">
+        نعم، أحتاج للمساعدة
+      </button>
+
+      <button class="secondary-btn full" onclick="closeModal('sosModal')">
+        إلغاء
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <footer>
+    <p>© 2026 Safe Lady — نقل آمن للنساء</p>
+  </footer>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
